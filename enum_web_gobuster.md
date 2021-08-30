@@ -13,7 +13,7 @@ $ sudo apt-get install gobuster
 
 ```bash
 # Fuzzing directories on the web server
-gobuster dir -u http://<attacker_ip>:8000 -a "Mozilla/5.0" -t1 -w /usr/share/seclists/Discovery/Web-Content/common.txt
+gobuster dir -u http://<victim_ip>:8000 -a "Mozilla/5.0" -t1 -w /usr/share/seclists/Discovery/Web-Content/common.txt
 
 Commands:
 dns     Use DNS subdomain bruteforcing
