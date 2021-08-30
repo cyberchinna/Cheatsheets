@@ -15,10 +15,10 @@ $ sudo apt-get install gobuster
 # Fuzzing directories on the web server
 gobuster dir -u http://<attacker_ip>:8000 -a "Mozilla/5.0" -t1 -w /usr/share/seclists/Discovery/Web-Content/common.txt
 
-Commands:
+**Commands:**
 dns     Use DNS subdomain bruteforcing
 
-Flags:
+**Flags:**
 -u     Target URL or Domain
 -a     Set user-agent string
 -t1    Number of concurrent threads
