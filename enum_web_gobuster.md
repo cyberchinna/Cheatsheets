@@ -13,7 +13,7 @@ $ sudo apt-get install gobuster
 
 ```bash
 # Fuzzing directories on the web server
-gobuster dir -u http://<victim_ip>:8000 -a "Mozilla/5.0" -t1 -k -w /usr/share/seclists/Discovery/Web-Content/common.txt
+$ sudo gobuster dir -u http://<victim_ip>:8000 -a "Mozilla/5.0" -t1 -k -w /usr/share/seclists/Discovery/Web-Content/common.txt
 
 Commands:
 dns     Use DNS subdomain bruteforcing
@@ -28,7 +28,7 @@ Flags:
 
 
 ```bash
-gobuster dir -e -u http://<victim_ip>:8000 -a "Mozilla/5.0" -t1 -w /usr/share/seclists/Discovery/Web-Content/common.txt
+$ sudo gobuster dir -e -u http://<victim_ip>:8000 -a "Mozilla/5.0" -t1 -w /usr/share/seclists/Discovery/Web-Content/common.txt
 
 Flags:
 -e    Print full path of the files
