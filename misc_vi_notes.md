@@ -1,12 +1,12 @@
 # VI - Helpful commands
 
 
-### Delete all lines
+#### Delete all lines
 ```bash
 :1,$d
 ```
 
-### Comment out lines 1 - 20
+#### Comment out lines 1 - 20
 ```bash
 :1,20s/^/#  /g
 ```
