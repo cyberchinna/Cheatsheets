@@ -9,7 +9,7 @@ $ sudo apt-get update
 $ sudo apt-get install gobuster
 ```
 
-### Usage 
+#### Usage 
 
 ```bash
 # Fuzzing directories on the web server
