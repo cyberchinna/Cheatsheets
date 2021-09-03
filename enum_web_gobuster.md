@@ -11,7 +11,7 @@ $ sudo apt-get install gobuster
 
 #### Usage 
 
-```bash
+```powershell
 # Fuzzing directories on the web server
 $ sudo gobuster dir -u http://<victim_ip>:8000 -a "Mozilla/5.0" -t1 -k -w /usr/share/seclists/Discovery/Web-Content/common.txt
 
