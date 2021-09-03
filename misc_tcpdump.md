@@ -27,5 +27,5 @@ sudo tcpdump -nX -r network.pcap | less
 
 ```bash
 # Display only packets with ack and push bits set printing in ASCII
-# tcpdump -A -n 'tcp[13]=24' -r network.pcacp
+sudo tcpdump -A -n 'tcp[13]=24' -r network.pcacp
 ```
