@@ -2,14 +2,14 @@
 
 ## Installation
 
-### Gobuster can be installed on a Kali Linux image via apt package manager
+#### Gobuster can be installed on a Kali Linux image via apt package manager
 
 ```bash 
 $ sudo apt-get update
 $ sudo apt-get install gobuster
 ```
 
-## Usage 
+### Usage 
 
 ```bash
 # Fuzzing directories on the web server
