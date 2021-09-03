@@ -6,6 +6,12 @@ $ sudo wirshark
 ```
 
 ```bash
+# Capture Filter - Subnet
+net 192.168.1.0/24
+```
+
+
+```bash
 # Display Filter - IP Address
 ip.addr == 192.168.0.5
 !(ip.addr == 192.168.0.0/24)
