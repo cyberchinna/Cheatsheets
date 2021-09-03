@@ -5,5 +5,5 @@ $ md5sum <file>
 ```
 
 ```powershell
-> certutil -hashfile <file> md5
+C:\> certutil -hashfile <file> md5
 ```
