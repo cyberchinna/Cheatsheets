@@ -1,6 +1,32 @@
 # TCPDUMP
 
 ```bash
+# List all possible interfaces
+sudo tcpdump -D
+```
+
+```bash
+# Capture packages and write to a file
+sudo tcpdump -i eth1 -w tmp.pcap
+```
+
+```bash
+# Show traffic from x.x.x.x either source or destination
+sudo tcpdump host 1.2.3.4
+```
+
+```bash
+# Filter traffic based on src or dst
+source tcpdump src 2.3.4.5 
+source tcpdump dst 3.4.5.6
+```
+
+```bash
+# Packer filter based on network, src or dst can be used as well
+sudo tcpdump net 1.2.3.0/24
+```
+
+```bash
 # Read PCAP file
 sudo tcpdump -r network.pcap
 ```
