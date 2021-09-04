@@ -1,4 +1,4 @@
-# Collecting the MD5 Hash
+# Collecting the MD5 Hash of a file
 
 ```bash
 $ md5sum <file>
