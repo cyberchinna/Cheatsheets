@@ -2,7 +2,7 @@
 
 ```bash
 # Start wireshark from commandline
-$ sudo wirshark
+$ sudo wirshark &
 ```
 
 ```bash
