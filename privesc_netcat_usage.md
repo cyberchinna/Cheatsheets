@@ -32,3 +32,10 @@ nc -nv -p 4849 <target w/ listener> 4445
 ```bash
 nc -n -v -z -w1 <target_ip> 100-250
 ```
+
+#### Netcat connecting to HTTP service
+```bash
+nc <target> 80
+GET / HTTP/1.0
+HOST: <IP>
+```
