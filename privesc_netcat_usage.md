@@ -35,3 +35,14 @@ nc <target> 80
 GET / HTTP/1.0
 HOST: <IP>
 ```
+
+```bash
+# Netcat simple web server
+index.html
+<html>
+<head>Simple Netcat Server</head>
+<body>Server exist!</body>
+</html>
+
+cat index.html | sudo nc -lvp 80
+```
