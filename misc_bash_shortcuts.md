@@ -11,6 +11,7 @@ Ctrl+SHIFT C & Ctrl+SHIFT V
 ```
 
 ```bash
+# Paste
 SHIFT INS
 ```
 
