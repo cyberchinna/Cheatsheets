@@ -1,5 +1,9 @@
-Ctrl+L = clear; clear the screen of the shell (emulator)
 # Bash Shortcuts
+
+```bash
+# Clear; clear the screen of the shell (emulator)
+Ctrl+L
+```
 
 ```bash
 # Copy & Paste
