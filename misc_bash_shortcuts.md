@@ -12,7 +12,7 @@ Ctrl+SHIFT C & Ctrl+SHIFT V
 
 ```bash
 # Paste
-SHIFT INS
+SHIFT+INS
 ```
 
 ```bash
@@ -22,7 +22,7 @@ Ctrl+W
 
 ```bash
 # Delete the word after the cursor
-ALT D
+ALT+D
 ```
 
 ```bash
