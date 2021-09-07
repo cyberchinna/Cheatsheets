@@ -21,5 +21,5 @@ Provide a title and paste content into Key section and Add SSH Key
 ```bash
 # Set the repositorie's origin
 git remote -v 
-git remote set-url origin git@gitlab.com:<repo path>.git
+git remote set-url origin git@gitlab.com:<repo_path>.git
 ```
