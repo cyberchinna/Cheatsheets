@@ -1,4 +1,4 @@
-# Git on localhost
+# Setup SSH Keys for Git repo
 
 ```bash
 git config --global user.name "<username>"
