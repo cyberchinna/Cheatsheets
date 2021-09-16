@@ -37,6 +37,7 @@ ip.addr == 10.10.50.1/24
 ```bash
 # Display Filter - Ports
 tcp.port == 25
+tcp.srcport == 21
 tcp.dstport == 23
 ip.addr == 10.10.50.1 and Tcp.port == 25
 ```
