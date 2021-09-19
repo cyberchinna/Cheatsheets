@@ -9,7 +9,7 @@
 /lib - Contains library files used by the core system programs
 /media - Contain the mount points for removable media, i.e. USB drives, CD-ROMs, etc.
 /mnt - On older linux systems, this directory contains mount points for removable devices that have been mounted manually
-/opt - Holds commerical software products
+/opt - Holds commerical software products and third-party application
 /proc - A virtual file system maintained by the Linux kernel
 /root - The home directory for the root account
 /sbin - Contain system binaries
