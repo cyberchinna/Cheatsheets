@@ -1,4 +1,4 @@
-# Following the initial foothole, tools to run
+# Tools to use following the initial foothole
 
 ## Linux
 
