@@ -1,5 +1,10 @@
 # Powercat 
 
+```bash
+# Download and install powercat to a Windows or Linux host
+PS C:\> git clone https://github.com/besimorhino/powercat
+```
+
 ```powershell
 # Load powercat and view help
 PS C:\> . .\powercat.ps1
