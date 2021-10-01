@@ -2,5 +2,5 @@
 
 To run a powershell script to run
 ```powershell
-PS C:\> SetExecutionPolicy Unrestricted
+PS C:\> Set-ExecutionPolicy Unrestricted
 ```
