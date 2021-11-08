@@ -53,6 +53,14 @@ driverquery.exe /v /fo csv | ConvertFrom-CSV | Select-Object 'Display Name', 'St
 
 # Gather the version number of the loader driver
 Get-WmiObject Win32_PnPSignedDriver | Select-Object DeviceName, DriverVersion, Manufacturer | where-Object {$_.DeviceName -like "*VMWare*"}
+
+# Check for AlwaysInstallElevated registry setting
+reg query HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Installer
+reg query HKEY_Local_USER\Software\Policies\Microsoft\Windows\Installer
+
+# Automated privesc tools
+windows-privesc-check2.exe -h 
+windows-privesc-check2.exe --dump -G (Dump security groups info)
 ```
 
 
@@ -103,5 +111,19 @@ cat /etc/fstab
 
 # View available disks
 /bin/lsblk
+
+# Enumerate loaded kernel modules
+lsmod 
+
+# Find additional information about a specific module
+lsmod 
+/sbin/modinfo libata
+
+# Search for SUID files
+find / -perm -u=s -type f 2>/dev/null 
+
+# Automated privesc tools
+./unix-privesc-check 
+./unix-privesc-check standard > output.txt
 
 ```
