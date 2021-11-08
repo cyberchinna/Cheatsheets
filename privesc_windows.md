@@ -61,6 +61,9 @@ reg query HKEY_Local_USER\Software\Policies\Microsoft\Windows\Installer
 # Automated privesc tools
 windows-privesc-check2.exe -h 
 windows-privesc-check2.exe --dump -G (Dump security groups info)
+
+# Run powershell as administrator
+powershell.exe start-process cmd.exe -Verb runAs 
 ```
 
 
