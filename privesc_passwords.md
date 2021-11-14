@@ -1,7 +1,7 @@
 # Passwords
 
 ```
-# Use cewl to crawl a website for passwords to built a wordlist
+# Use cewl to crawl a website for passwords to built a custom wordlist
 
 cewl [site] -m 6 -w [output_file.txt]
 
