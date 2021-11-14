@@ -1,4 +1,4 @@
-# Passwords
+# Custom wordlists
 
 ```
 # Use cewl to crawl a website for passwords to built a custom wordlist
