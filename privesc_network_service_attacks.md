@@ -56,5 +56,6 @@ hydra -L users.txt -P passwords.txt url http-post-form "/index.php:username=^USE
 
   -v  Verbose
   -f  Stop the attack when the first successful result found
+  
 # Use hydra to bruteforce SSH 
 hydra -l user -P /usr/share/wordlists/rockyou.txt ssh://127.0.0.1
