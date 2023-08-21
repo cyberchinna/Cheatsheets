@@ -3,15 +3,15 @@
 ```bash
 ldapsearch -h [victim ip] -x -s base namingcontexts    
 ```
- -x     simple authentication   
- -s     scope 
+  -x     simple authentication   
+  -s     scope 
 
 
 ```bash
 #This will give us the domain naming   
 ldapsearch -h [victim ip] -x -s -b "DC=htb,DC=local"  > ldap-anonymous.out
 ```
- -b     base  
+  -b     base  
 
 
 ```bash
